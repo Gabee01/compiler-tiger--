@@ -1336,7 +1336,7 @@ yyreduce:
 
   case 8:
 #line 38 "tiger.y"
-    {printf("statement");}
+    {printf("statement");;}
     break;
 
 
@@ -1555,7 +1555,7 @@ yyreturn:
 }
 
 
-#line 52 "tiger.y"
+#line 53 "tiger.y"
 
 
 int main() {

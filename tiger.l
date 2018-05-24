@@ -15,8 +15,9 @@
 [0-9]+                  { return T_INT; }
 \"[^\"]*\"				{ return T_STRING; }
 ":="					{ return T_ATTRIBUTION; }
-\n                      /* ignore end of line */;
+\n                      { return T_NEWLINE; }
 [ \t]+                  /* ignore whitespace */;
-[exit quit]		{return T_QUIT;}
+\/\*.*\*\/				/* ingore comments*/;
+[exit quit]				{ return T_QUIT; }
 
 %%

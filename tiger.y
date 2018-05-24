@@ -35,12 +35,13 @@ line: T_NEWLINE
 ;
 
 statement: value
-	|T_ID T_ATTRIBUTION statement {printf("statement")}
+	|T_ID T_ATTRIBUTION statement {printf("statement");}
 ;
 
 value:
 	T_INT
 	|T_STRING
+;
 
 /*expression: T_INT				{ $$ = $1; }
 	  | expression T_PLUS expression	{ $$ = $1 + $3; }
