@@ -1,13 +1,13 @@
-all: tiger
+all: tc--
 
-tiger.tab.c tiger.tab.h:	tiger.y
-	bison -d tiger.y
+tc--.tab.c tc--.tab.h:	tc--.y
+	bison -d tc--.y
 
-lex.yy.c: tiger.l tiger.tab.h
-	flex tiger.l
+lex.yy.c: tc--.l tc--.tab.h
+	flex tc--.l
 
-tiger: lex.yy.c tiger.tab.c tiger.tab.h
-	gcc -o tiger tiger.tab.c lex.yy.c
+tc--: lex.yy.c tc--.tab.c tc--.tab.h
+	gcc -o tc-- tc--.tab.c lex.yy.c
 
 clean:
-	rm tiger tiger.tab.c lex.yy.c tiger.tab.h
+	rm tc-- tc--.tab.c lex.yy.c tc--.tab.h

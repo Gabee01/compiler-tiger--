@@ -43,8 +43,19 @@
      T_STRING = 259,
      T_NEWLINE = 260,
      T_QUIT = 261,
-     T_ID = 262,
-     T_ATTRIBUTION = 263
+     T_WHILE = 262,
+     T_DO = 263,
+     T_FUNCTION = 264,
+     T_LET = 265,
+     T_VAR = 266,
+     T_ID = 267,
+     T_ATTRIBUTION = 268,
+     T_OP = 269,
+     T_IN = 270,
+     T_END = 271,
+     T_DOTCOM = 272,
+     T_BRACEO = 273,
+     T_BRACEC = 274
    };
 #endif
 /* Tokens.  */
@@ -52,21 +63,32 @@
 #define T_STRING 259
 #define T_NEWLINE 260
 #define T_QUIT 261
-#define T_ID 262
-#define T_ATTRIBUTION 263
+#define T_WHILE 262
+#define T_DO 263
+#define T_FUNCTION 264
+#define T_LET 265
+#define T_VAR 266
+#define T_ID 267
+#define T_ATTRIBUTION 268
+#define T_OP 269
+#define T_IN 270
+#define T_END 271
+#define T_DOTCOM 272
+#define T_BRACEO 273
+#define T_BRACEC 274
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 14 "tiger.y"
+#line 14 "tc--.y"
 {
 	int ival;
 	char* sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 70 "tiger.tab.h"
+#line 92 "tc--.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
