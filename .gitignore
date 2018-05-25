@@ -1,5 +1,4 @@
-tiger--
-tiger--.l
-tiger--.tab.c
-tiger--.tab.h
+tc--
+*.tab.c
+*.tab.h
 lex.yy.c
