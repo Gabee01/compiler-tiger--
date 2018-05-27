@@ -1,0 +1,28 @@
+let
+in
+	while a > 10 do 
+	(
+		
+	)
+
+	if a = 10 
+	then 
+	(
+		c := "Hey";
+	)
+	
+	if a <> 10 
+	then 
+	(
+		a := "Hey";
+	) else 
+	(
+		b := 10;
+		a := b + 10;
+		a := b - 10;
+		a := b + 10;
+		a := b / 10;
+	)
+
+	a:=20;
+end

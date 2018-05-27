@@ -1,0 +1,5 @@
+let
+in
+	printf("hey");
+	n := getint;
+end

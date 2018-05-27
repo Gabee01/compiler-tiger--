@@ -1,0 +1,127 @@
+
+Definição da Linguagem TIGER--
+André Luiz Pires Guedes
+2003/1 (revisto em 2018/1)
+
+A linguagem Tiger-- é um subconjunto da linguagem Tiger, definida no livro Modern Compiler Implementation in C de Andrew W. Appel. Disponível em http://www.cs.princeton.edu/~appel/modern/.
+
+A seguir apresentaremos a definição da linguagem.
+Símbolos
+
+    identificadores: [a-zA-Z][a-zA-Z0-9_]*
+    números: [0-9]+
+    strings: "[^"]*"
+    comentários: começam com /* e terminam com */ 
+
+Outros
+
+:= ; , ( ) + - * / = <> > < >= <= & |
+Palavras Reservadas
+
+var function if then else while do let in end
+Programa
+
+Um programa em Tiger-- é uma expressão (exp).
+Declarações
+
+Uma declaração é uma declaração de variável ou de função. As declarações podem estar em seqüência, e não são usadas pontuações para separar.
+
+    declaração de variável: "var id := exp"
+    declaração de função: "function id ( id, id, ..., id ) := exp" Onde os parâmetros são uma seqüência de identificadores. 
+
+Expressões
+
+Uma expressão em Tiger-- pode ser:
+
+    variável: O valor é o conteúdo de uma variável (id).
+
+    sem valor: Expressões que não retornam valor algum (similar ao void do C).
+
+    seqüência: Seqüência de duas ou mais expressões entre parenteses e separadas por ";" (exp ; exp ; exp ; ... ; exp). Todas as expressões são avaliadas, mas o valor é o da última expressão (se existir).
+
+    número inteiro: Constante
+
+    negação: Um número inteiro precedido do símbolo "-"(ex. "-26").
+
+    chamada a função: A chamada a uma função id() ou id(exp, exp, ..., exp) que significa a aplicação da função com os parâmetros passados (da esquerda para a direita). Se a função não retorna valor, a expressão formada pela chamada a ela também não.
+
+    aritimética: Expressões da forma exp op exp, onde op é um operador aritmético (+, -, *, /). Usa operandos inteiros para resultados inteiros.
+
+    comparação: Expressões da forma exp op exp, onde op é um operador de comparação (=, <>, >, <, >=, <=). Retorna 1 se a comparação for verdadeira e 0 se for falsa.
+
+    lógica: Expressões da forma exp op exp, onde op é um operador lógico (&, |). Usa curto-circuito e qualquer valor diferente de 0 (zero) é considerado verdadeiro.
+
+    atribuição: id := exp, onde o valor de id passa a ser o valor da expressão exp. Não retorna valor.
+
+    if-then-else: A expressão "if exp1 then exp2 else exp3" avalia exp1. Se o resultado for diferente de 0 (zero) avalia exp2 senão avalia exp3. As expressões exp2 e exp3 devem ambas ter o mesmo tipo de retorno (com valor ou sem valor) que será também o tipo da expressão como um todo.
+
+    if-then: A expressão "if exp1 then exp2" avalia exp1. Se o resultado for diferente de 0 (zero) avalia exp2. A expressão exp2 não pode retornar valor, e o mesmo acontece para a expressão como um todo.
+
+    while: A expressão "while exp1 do exp2" avalia a expressão exp1. Se o resultado for diferente de 0 (zero) avalia a expressão exp2, e volta a avaliar a expressão como um todo. A expressão exp2 não pode retornar valor, e o mesmo acontece para a expressão como um todo.
+
+    let: A expressão "let declarações in exp1 ; exp2 ; ... ; expn end" avalia as declarações (definindo variáveis e funções cujo escopo se restringe as expressões entre o in e o end), e avalia as expressões exp1, exp2, ... expn. O resultado de toda a expressão é o resultado da última expressão (expn), caso exista.
+
+    parenteses: Os parenteses podem ser usados para agrupar expressões. 
+
+Regras de Escopo
+
+    variaveis locais: Na expressão "let ... in ... end" o escopo das variáveis definidas entre o let e o in inicia após a declaração e termina no end.
+
+    escopos aninhados: Podemos ter aninhamento de escopos, e em um certo ponto temos acesso a variáveis definidas em níveis mais altos.
+
+    parâmetros: O escopo dos parâmetros de uma função se restringe ao corpo da função.
+
+    funções: mesmas regras das variáveis 
+
+Precedência de Operadores
+
+    (unário): negação tem a maior precedência
+    *,/: multiplicação
+    +,-: adição
+    =,<>,>,<,>=,<=: comparação
+    &,|: lógicos têm a menor precedência 
+
+Associatividade
+
+Os operadores *,/,+,- são associativos pela esquerda. Os demais não são associativos.
+Funções Aninhadas
+
+Podemos usar mais de um nível de funções, como em Pascal, assim como vários níveis de expressões.
+Recursão
+
+Não é permitido o uso de recursão.
+Funções Pré-definidas
+
+Temos duas funções pré-definidas em Tiger-- para entrada e saída.
+
+    getint(): Faz a leitura de um inteiro da entrada padrão. Caso o texto lido não seja um inteiro, ocorre um erro de execução. Retorna um inteiro.
+
+    printf(formato, exp, exp, ..., exp): Escreve na saída padrão o texto formado pelo formato com as devidas substituições pelas expressões que seguem. Funciona como o printf da linguagem C. Não retorna valor.
+
+    Obs.: As strings só aparecem como o formato de um printf. 
+
+Exemplo de Programa em Tiger--
+Fatorial
+
+let
+        var n := 0     /* o numero    */
+        var f := 1     /* o fatorial  */
+        var i := 2     /* um contador */
+in
+        printf("Entre com o numero:");
+        n := getint();
+        while i <= n do
+        (
+                f := f * i;
+                i := i + 1;
+        )
+        printf("\nfatorial de %d = %d\n", n, f)
+end
+
+Outras referências:
+
+    https://www.lrde.epita.fr/~tiger/tiger.html
+    https://cs.nyu.edu/courses/fall13/CSCI-GA.2130-001/tiger-spec.pdf
+    http://matcomgrader.com/media/faq/tiger.pdf
+    http://www.cs.tufts.edu/comp/181/tiger.html 
+
