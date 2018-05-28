@@ -10,6 +10,7 @@
 %}
 
 %%
+\/\*.*\*\/				/* ingore comments*/;
 null					{ return T_NULL; }
 let						{ return T_LET; }
 end						{ return T_END; }
@@ -21,9 +22,9 @@ if						{ return T_IF; }
 then					{ return T_THEN; }
 else					{ return T_ELSE; }
 ;						{ return T_DOTCOM; }
+,						{ return T_COM;}
 :=						{ return T_ATTRIBUTION; }
 [ \t]+                  /* ignore whitespace */;
-\/\*.*\*\/				/* ingore comments*/;
 \(						{ return T_BRACEO; }
 \)						{ return T_BRACEC; }
 \*						|

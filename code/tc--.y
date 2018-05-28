@@ -25,7 +25,7 @@ void yyerror(const char* s);
 %token T_WHILE T_DO
 %token T_IF T_THEN T_ELSE
 %token T_ARITH T_COMP T_LOGIC
-%token T_DOTCOM T_BRACEO T_BRACEC
+%token T_COM T_DOTCOM T_BRACEO T_BRACEC
 
 %start start
 
@@ -36,26 +36,22 @@ start: { puts("reduced by start0"); }
 ;
 
 letAttrs: { puts("reduced by letAttrs0"); }
-	|T_VAR attribution letAttrs { puts("reduced by letAttrs1"); }
+	| letAttribution letAttrs { puts("reduced by letAttrs1"); }
 ;
 
-attribution: T_ID T_ATTRIBUTION expression T_DOTCOM { puts("reduced by attribution0"); }
+letAttribution: T_VAR T_ID T_ATTRIBUTION expression { puts("reduced by attribution0"); }
+
+attribution: T_ID T_ATTRIBUTION expression { puts("reduced by attribution0"); }
 ;
 
 value: number { puts("reduced by value0"); }
 	| T_STRING { puts("reduced by value1"); }
 	| T_ID { puts("reduced by value2"); }
 	| T_NULL { puts("reduced by value3"); }
-	|
 ;
 
 number: T_INT { puts("reduced by number0"); }
 	|T_NINT { puts("reduced by number1"); }
-;
-
-sequence: T_BRACEO sequence 
-	| expression T_DOTCOM sequence
-	| expression T_BRACEC { puts("reduced by sequence"); }
 ;
 
 expressionColection: { puts("reduced by expressionColection0"); }
@@ -65,13 +61,14 @@ expressionColection: { puts("reduced by expressionColection0"); }
 while: T_WHILE compareCollection T_DO sequence { puts("reduced by while"); }
 ;
 
-expression: value { puts("reduced by expression0"); }
+expression: expression T_DOTCOM { puts("reduced by expression3"); }
+	|attribution { puts("reduced by expression2"); }
+	|value { puts("reduced by expression0"); }
 	|arithmetic { puts("reduced by expression1"); }
 	|function { puts("reduced by expression4"); }
 	|compareCollection { puts("reduced by expression5"); }
 	|T_IF ite { puts("reduced by expression6"); }
 	|while { puts("reduced by expression8"); }
-	|attribution { puts("reduced by expression2"); }
 ;
 
 arithmetic: T_ID T_ARITH T_ID { puts("reduced by arith0"); }
@@ -82,23 +79,31 @@ arithmetic: T_ID T_ARITH T_ID { puts("reduced by arith0"); }
 	| number T_ARITH arithmetic { puts("reduced by arith5"); }
 ;
 
-function: T_FUNCTION params { puts("reduced by function"); }
+function: T_FUNCTION params { puts("reduced by function0"); }
 ;
 
-params: T_BRACEO T_BRACEC { puts("reduced by params0"); }
-	| T_BRACEO value T_BRACEC  { puts("reduced by params1"); }
+sequence: | T_BRACEO T_BRACEC
+	| T_BRACEO sequence { puts("reduced by sequence0"); }
+	| expression T_BRACEC { puts("reduced by sequence2"); }
+	| expression sequence { puts("reduced by sequence1"); }
 ;
 
-ite: compareCollection T_THEN sequence ite 
-	| 
+params: | T_BRACEO T_BRACEC
+	| T_BRACEO params { puts("reduced by sequence0"); }
+	| value T_BRACEC { puts("reduced by sequence2"); }
+	| value T_COM params { puts("reduced by sequence1"); }
 ;
 
-compareCollection: { puts("reduced by compareCollection0"); }
-	| compare { puts("reduced by compareCollection1"); }
+ite: compareCollection T_THEN sequence ite { puts("reduced by it"); }
+	| T_ELSE sequence { puts("reduced by ite"); }
+	|
+;
+
+compareCollection: compare { puts("reduced by compareCollection1"); }
 	| compare T_LOGIC compareCollection { puts("reduced by compareCollection2"); }
 ;
 
-compare: T_ID T_COMP T_ID T_DO { puts("reduced by compare0"); }
+compare: T_ID T_COMP T_ID { puts("reduced by compare0"); }
 	| T_ID T_COMP value { puts("reduced by compare2"); }
 	| value T_COMP T_ID { puts("reduced by compare3"); }
 	| value T_COMP value { puts("reduced by compare4"); }
