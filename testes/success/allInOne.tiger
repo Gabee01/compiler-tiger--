@@ -1,0 +1,49 @@
+let
+	var a:=10
+	var b :="10"
+	var c:= -10
+in
+	printf("hey");
+	n := getint();
+
+	while a > 10 do 
+	(
+		b := 10;
+		a:=20;
+	)
+
+	if a = b & b = a then (
+		printf("THEY ARE EQUAL !");
+	)
+
+	if a > b | a = b then (
+		a:=b;
+		printf("THEY ARENT EQUAL !");
+	)else(
+		b:=a;
+		printf("THEY ARENT EQUAL !");
+	)
+
+	while a > 10 do (
+		b:=10;
+	)
+
+	while a > 10 do (
+		b:=10;
+	)
+
+	while a < b do (
+		b:=10;
+	)
+
+	while 10 = b do (
+		b:=10;
+		a := a + b;
+		a := 10 + 10;
+		a := 10/b;
+		b:=10*a;
+		a := b*a;
+		c := a*10;
+	)
+
+end

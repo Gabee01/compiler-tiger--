@@ -1,28 +1,17 @@
 let
 in
-	while a > 10 do 
-	(
-		
-	)
-
-	if a = 10 
-	then 
-	(
-		c := "Hey";
-	)
-	
-	if a <> 10 
-	then 
-	(
-		a := "Hey";
-	) else 
-	(
+	while a > b do (
 		b := 10;
-		a := b + 10;
-		a := b - 10;
-		a := b + 10;
-		a := b / 10;
+		a:=20;
 	)
 
-	a:=20;
+	if a = b then (
+		printf("THEY ARE EQUAL !");
+	)
+
+	if a > b then (
+		a:=b;
+	)else(
+		b:=a;
+	)
 end

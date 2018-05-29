@@ -1,0 +1,17 @@
+let
+	var a:=10
+	var b:=11
+in
+
+	if a = b & b = a then (
+		printf("THEY ARE EQUAL !");
+	)
+
+	if a > b | a = b then (
+		a:=b;
+		printf("THEY ARENT EQUAL !");
+	)else(
+		b:=a;
+		printf("THEY ARENT EQUAL !");
+	)
+end

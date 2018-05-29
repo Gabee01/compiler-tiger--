@@ -1,6 +1,6 @@
 let
-	var a:=10;
-	var b :="10";
-	var c:= -10;
+	var a:=10
+	var b :="10"
+	var c:= -10
 in
 end

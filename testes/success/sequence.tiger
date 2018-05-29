@@ -1,0 +1,8 @@
+let
+in
+	while a > 10 do 
+	(
+		b := 10;
+		a:=20;
+	)
+end

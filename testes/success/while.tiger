@@ -1,0 +1,18 @@
+let
+in
+	while a > 10 do (
+		b:=10;
+	)
+
+	while a > 10 do (
+		b:=10;
+	)
+
+	while a < b do (
+		b:=10;
+	)
+
+	while 10 = b do (
+		b:=10;
+	)
+end
